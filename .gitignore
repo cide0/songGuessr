@@ -1,0 +1,6 @@
+.idea
+code/vendor
+/database/
+/code/tests/phpunit.coverage.xml
+/code/tests/phpunit.report.xml
+/code/tests/.phpunit.result.cache

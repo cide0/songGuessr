@@ -1,0 +1,3 @@
+[mysqld]
+sql_mode=""
+default_time_zone=Europe/Berlin

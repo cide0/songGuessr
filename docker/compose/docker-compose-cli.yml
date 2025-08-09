@@ -1,0 +1,9 @@
+services:
+  php_cli:
+    container_name: songguessr_php_cli
+    image: songguessr/php_cli:dev
+    working_dir: /var/www/html
+    volumes:
+      - ./../../code:/var/www/html
+    environment:
+      - VHOST=localhost

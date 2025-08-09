@@ -1,0 +1,30 @@
+services:
+  nginx:
+    container_name: songguessr_nginx
+    image: songguessr/nginx:dev
+    restart: unless-stopped
+    volumes:
+      - ./../../code/public:/var/www/html/public
+    ports:
+      - "88:80"
+
+  php:
+    container_name: songguessr_php
+    image: songguessr/php:dev
+    restart: unless-stopped
+    volumes:
+      - ./../../code:/var/www/html
+
+  mysql:
+    image: songguessr/mysql:dev
+    build:
+      context: ../../.
+      dockerfile: docker/mysql/Dockerfile
+    container_name: songguessr_mysql
+    restart: unless-stopped
+    volumes:
+      - ./../../database:/var/lib/mysql:rw
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    ports:
+      - '3306:3306'
