@@ -9,6 +9,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteCollectorProxy;
 use songguessr\Infrastructure\Controller\SongGuessrController;
+use songguessr\Infrastructure\HTTP\Middleware\ErrorMiddleware;
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 
@@ -18,7 +19,9 @@ ini_set('display_errors', 1);
 
 $slimContainer = new Container();
 
-$factory = new Factory($slimContainer);
+$factory = new Factory(
+    new Configuration()
+);
 
 $slimContainer->set(SongGuessrController::class, function () use ($factory) {
     return $factory->createSongGuessrController();
@@ -48,11 +51,24 @@ $slimApp->group('/songguessr', function (RouteCollectorProxy $group) {
         '/',
         SongGuessrController::class . ':comingSoon'
     );
+    $group->get(
+        '/songs/random',
+        SongGuessrController::class . ':getRandomSong'
+    );
+});
+
+$slimApp->add(function (Request $request, $handler) {
+    $response = $handler->handle($request);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
 $slimApp->addRoutingMiddleware();
 
 $errorHandler = $slimApp->addErrorMiddleware(true, true, true);
+$errorHandler->setDefaultErrorHandler(new ErrorMiddleware());
 $errorHandler->setErrorHandler(
     HttpNotFoundException::class,
     function (

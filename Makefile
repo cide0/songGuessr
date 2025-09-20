@@ -36,6 +36,10 @@ install: build-dev
 update:
 	$(CLI) run --rm --no-deps php_cli php -d memory_limit=-1 /usr/local/bin/composer update
 
+.PHONY: composer-dump
+composer-dump:
+	$(CLI) run --rm --no-deps php_cli php -d memory_limit=-1 /usr/local/bin/composer dump-autoload
+
 .PHONY: cleanup
 cleanup:
 	docker system prune -a -f --volumes
@@ -48,6 +52,11 @@ backup:
 import-db-backup:
 	docker cp "./docker/mysql/backups/$(FILENAME)" songguessr_mysql:backup.sql && \
 	docker exec songguessr_mysql bash -c "mysql -uroot -padmin songguessr < backup.sql"
+
+.PHONY: reset-test-db
+reset-test-db:
+	docker cp "./docker/mysql/backups/$(FILENAME)" songguessr_mysql:backup.sql && \
+	docker exec songguessr_mysql bash -c "mysql -uroot -padmin songguessr_testing < backup.sql"
 
 .PHONY: unit-test
 unit-test:

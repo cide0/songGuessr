@@ -1,8 +1,9 @@
 import {Application} from "./Application.js";
+import {Button} from "./Elements/Button.js";
 
-let startBtn = document.getElementById('start-btn');
+let startButton = new Button('start-btn');
 
-startBtn.addEventListener('click', () => {
+startButton.addEventListener('click', async () => {
     let app = new Application();
-    app.start();
+    await app.runGame();
 });

@@ -1,5 +1,8 @@
 :root{
+    --text-color: #fff;
     --main-color: #1DB954;
     --bg-color: #000;
     --button-hover-color: #167237;
+    --input-color: #212121;
+    --input-placeholder-color: #b3b3b3;
 }
