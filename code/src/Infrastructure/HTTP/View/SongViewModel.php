@@ -23,6 +23,10 @@ class SongViewModel implements ViewModel
             'artist' => $this->songModel->getArtist(),
             'guessed' => $this->songModel->isGuessed(),
             'picker' => PickerViewModel::fromPickerModel($this->songModel->getPicker()),
+            'audioSource' => $this->songModel->getAudioSource(),
+            'videoSource' => $this->songModel->getVideoSource(),
+            'album' => $this->songModel->getAlbum(),
+            'albumCoverSource' => $this->songModel->getAlbumCoverSource()
         ];
     }
 }

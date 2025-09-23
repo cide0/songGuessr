@@ -2,11 +2,14 @@
 
 namespace songguessr;
 
+use songguessr\Application\Handler\GetHintHandler;
 use songguessr\Application\Handler\GetSongHandler;
 use songguessr\Domain\Model\SongModel;
+use songguessr\Domain\Service\HintService;
 use songguessr\Domain\Service\SongService;
 use songguessr\Infrastructure\Controller\SongGuessrController;
 use songguessr\Infrastructure\Storage\MySqlClient;
+use songguessr\Infrastructure\Storage\Read\HintStorage;
 use songguessr\Infrastructure\Storage\Read\SongStorage;
 
 class Factory
@@ -19,7 +22,8 @@ class Factory
     public function createSongGuessrController(): SongGuessrController
     {
         return new SongGuessrController(
-            new GetSongHandler($this->createSongService())
+            new GetSongHandler($this->createSongService()),
+            new GetHintHandler($this->createHintService())
         );
     }
 
@@ -43,6 +47,20 @@ class Factory
     private function createSongStorage(): SongStorage
     {
         return new SongStorage(
+            $this->createMySqlClient()
+        );
+    }
+
+    private function createHintService(): HintService
+    {
+        return new HintService(
+            $this->createHintStorage()
+        );
+    }
+
+    private function createHintStorage(): HintStorage
+    {
+        return new HintStorage(
             $this->createMySqlClient()
         );
     }

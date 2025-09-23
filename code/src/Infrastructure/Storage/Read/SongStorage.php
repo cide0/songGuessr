@@ -17,7 +17,7 @@ class SongStorage
         $connection = $this->mySqlClient->connect();
         $statement = $connection->query(
             'SELECT * FROM song
-                    INNER JOIN picker ON song.picked_by = picker.id
+                    INNER JOIN picker ON song.picked_by = picker.picker_id
                     WHERE guessed = 0 
                     ORDER BY RAND() LIMIT 1'
         );

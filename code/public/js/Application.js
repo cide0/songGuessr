@@ -1,6 +1,7 @@
 import {FetchWrapper} from "./Utility/FetchWrapper.js";
 import {SongView} from "./View/SongView.js";
 import {Div} from "./Elements/Div.js";
+import {HintView} from "./View/HintView.js";
 
 export class Application{
 
@@ -17,8 +18,12 @@ export class Application{
 
     async runGame() {
         let song = await this.loadSong();
+
         let songView = new SongView(song);
         songView.render();
+
+        let hintView = new HintView(song);
+        hintView.render();
     }
 
     async loadSong() {

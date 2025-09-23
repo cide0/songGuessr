@@ -51,18 +51,17 @@ $slimApp->group('/songguessr', function (RouteCollectorProxy $group) {
         '/',
         SongGuessrController::class . ':comingSoon'
     );
-    $group->get(
-        '/songs/random',
-        SongGuessrController::class . ':getRandomSong'
-    );
-});
+    $group->group('/songs', function (RouteCollectorProxy $group) {
+        $group->get(
+            '/random',
+            SongGuessrController::class . ':getRandomSong'
+        );
 
-$slimApp->add(function (Request $request, $handler) {
-    $response = $handler->handle($request);
-    return $response
-        ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        $group->get(
+            '/{songId}/hints/{sequenceNumber}',
+            SongGuessrController::class . ':getSongHintBySequenceNumber'
+        );
+    });
 });
 
 $slimApp->addRoutingMiddleware();
@@ -95,6 +94,14 @@ $errorHandler->setErrorHandler(
             ->withStatus(404);
     }
 );
+
+$slimApp->add(function (Request $request, $handler) {
+    $response = $handler->handle($request);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
 
 $slimApp->run();
 

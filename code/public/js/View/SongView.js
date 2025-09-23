@@ -14,6 +14,7 @@ export class SongView extends View{
 
     render() {
         this.renderContainer('song-container');
+        this.renderUiAudioElements();
         this.renderSongName();
         this.renderGuess('song');
         this.renderPlayerName();
@@ -41,6 +42,9 @@ export class SongView extends View{
         guessInput.setAttribute('type', 'text');
         guessInput.setAttribute('placeholder', this.guessInputPlaceholder);
         guessInput.setAttribute('autocomplete', 'off');
+        guessInput.addEventListener('input', () => {
+            guessInput.classList.remove('incorrect-guess');
+        });
         guessContainer.appendChild(guessInput);
 
         let guessButton = this.domParser.createElement('a');
@@ -49,28 +53,60 @@ export class SongView extends View{
         guessContainer.appendChild(guessButton);
 
         guessButton.addEventListener('click', () => {
-            let userGuess = guessInput.value;
+            this.guessEventListener(guessInput, type)
+        });
 
-            let guessedTypeValue = this.song.name;
-            if(type === 'player') {
-                guessedTypeValue = this.song.picker.firstName;
+        guessInput.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter'){
+                this.guessEventListener(guessInput, type)
+            }
+        });
+    }
+
+    guessEventListener(guessInput, type){
+        let userGuess = guessInput.value;
+
+        let guessedTypeValue = this.song.name;
+        if(type === 'player') {
+            guessedTypeValue = this.song.picker.firstName;
+        }
+
+        if(userGuess.toLowerCase() === guessedTypeValue.toLowerCase()) {
+            let successAudio = document.getElementById('success-audio');
+            if (successAudio.paused) {
+                successAudio.play();
+            }else{
+                successAudio.currentTime = 0
             }
 
-            if(userGuess.toLowerCase() === guessedTypeValue.toLowerCase()) {
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.2, x: 0.5 },
-                    zIndex: -1,
-                    colors: ['#1DB954', '#167237', '#212121', '#b3b3b3']
-                });
-                let placeholderContainer = new Div(type + '-placeholder-container');
-                let placeholderChildren = placeholderContainer.htmlElement.children;
-                for (let i = 0; i < guessedTypeValue.length; i++) {
-                    placeholderChildren[i].innerHTML = guessedTypeValue[i];
-                }
+            confetti({
+                particleCount: 250,
+                spread: 100,
+                origin: { y: 0.22, x: 0.5 },
+                zIndex: -1,
+                colors: ['#1DB954', '#167237', '#212121', '#b3b3b3']
+            });
+
+            let placeholderContainer = new Div(type + '-placeholder-container');
+            let placeholderChildren = placeholderContainer.htmlElement.children;
+            for (let i = 0; i < guessedTypeValue.length; i++) {
+                placeholderChildren[i].innerHTML = guessedTypeValue[i];
             }
-        })
+        } else {
+            let failureAudio = document.getElementById('failure-audio');
+            if (failureAudio.paused) {
+                failureAudio.play();
+            }else{
+                failureAudio.currentTime = 0
+            }
+
+            guessInput.classList.add('incorrect-shake');
+            guessInput.classList.add('incorrect-guess');
+            setTimeout(() => {
+                guessInput.classList.remove('incorrect-shake');
+                guessInput.setAttribute('placeholder', this.guessInputPlaceholder);
+            }, 300);
+        }
     }
 
     renderPlayerName() {
@@ -84,5 +120,17 @@ export class SongView extends View{
         songContainer.appendChild(playerNameContainer);
 
         new PlayerPlaceholder('player-placeholder-container', this.song.picker.firstName);
+    }
+
+    renderUiAudioElements() {
+        let successAudio = this.domParser.createElement('audio');
+        successAudio.setAttribute('id', 'success-audio');
+        successAudio.setAttribute('src', './../public/assets/audio/success-sound.mp3');
+        this.gameContainer.appendChild(successAudio);
+
+        let failureAudio = this.domParser.createElement('audio');
+        failureAudio.setAttribute('id', 'failure-audio');
+        failureAudio.setAttribute('src', './../public/assets/audio/failure-sound.mp3');
+        this.gameContainer.appendChild(failureAudio);
     }
 }

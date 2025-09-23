@@ -6,14 +6,6 @@ export class DomElement{
         this.htmlElement = domParser.getById(elementId);
     }
 
-    getCurrentValue(){
-        return this.htmlElement.value;
-    }
-
-    getInnerHtml(){
-        return this.htmlElement.innerHTML;
-    }
-
     remove(){
         this.htmlElement.remove();
     }
