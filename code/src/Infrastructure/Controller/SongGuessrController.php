@@ -4,6 +4,7 @@ namespace songguessr\Infrastructure\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use songguessr\Application\Handler\GameStatusHandler;
 use songguessr\Application\Handler\GetHintHandler;
 use songguessr\Application\Handler\GetSongHandler;
 use songguessr\Infrastructure\HTTP\ResponseHandler;
@@ -17,6 +18,7 @@ class SongGuessrController
     public function __construct(
         private GetSongHandler $getSongHandler,
         private GetHintHandler $getHintHandler,
+        private GameStatusHandler $gameStatusHandler
     )
     {
     }
@@ -28,6 +30,36 @@ class SongGuessrController
     ): ResponseInterface {
         $response->getBody()->write('coming soon');
         return $response;
+    }
+
+    public function startNewGame(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+        $songModel = $this->getSongHandler->handleGetRandomSong();
+        $this->gameStatusHandler->handleStartNewGame($songModel->getId());
+
+        return ResponseHandler::handle(
+            $response,
+            SongViewModel::fromSongModel($songModel),
+            self::HTTP_OK
+        );
+    }
+
+    public function getCurrentSong(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+        $currentSongId = $this->gameStatusHandler->handleGetCurrentSongId();
+        $songModel = $this->getSongHandler->handleGetSongById($currentSongId);
+
+        return ResponseHandler::handle(
+            $response,
+            SongViewModel::fromSongModel($songModel),
+            self::HTTP_OK
+        );
     }
 
     public function getRandomSong(

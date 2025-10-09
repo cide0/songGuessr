@@ -51,10 +51,19 @@ $slimApp->group('/songguessr', function (RouteCollectorProxy $group) {
         '/',
         SongGuessrController::class . ':comingSoon'
     );
+    $group->get(
+        '/start',
+        SongGuessrController::class . ':startNewGame'
+    );
     $group->group('/songs', function (RouteCollectorProxy $group) {
         $group->get(
             '/random',
             SongGuessrController::class . ':getRandomSong'
+        );
+
+        $group->get(
+            '/current',
+            SongGuessrController::class . ':getCurrentSong'
         );
 
         $group->get(

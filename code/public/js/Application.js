@@ -1,24 +1,31 @@
 import {FetchWrapper} from "./Utility/FetchWrapper.js";
 import {SongView} from "./View/SongView.js";
-import {Div} from "./Elements/Div.js";
 import {HintView} from "./View/HintView.js";
+import {StartGameView} from "./View/StartGameView.js";
 
 export class Application{
 
     fetchWrapper = new FetchWrapper();
 
     constructor(){
-        this.removeStartContainer();
     }
 
-    removeStartContainer(){
-        let startContainer = new Div('start-container');
-        startContainer.remove();
+    async init(){
+        let currentSong = await this.fetchWrapper.get('/songs/current');
+        if(currentSong.errors === undefined) {
+            await this.runGame(currentSong);
+        } else {
+            let startGameView = new StartGameView();
+            startGameView.render();
+        }
     }
 
-    async runGame() {
-        let song = await this.loadSong();
+    async startGame(){
+        let song = await this.fetchWrapper.get('/start');
+        await this.runGame(song);
+    }
 
+    async runGame(song) {
         let songView = new SongView(song);
         songView.render();
 

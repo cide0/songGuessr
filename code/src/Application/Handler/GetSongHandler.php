@@ -17,4 +17,9 @@ class GetSongHandler
     {
         return $this->songService->getRandomSong();
     }
+
+    public function handleGetSongById(int $songId): SongModel
+    {
+        return $this->songService->getSongById($songId);
+    }
 }

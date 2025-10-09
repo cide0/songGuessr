@@ -17,4 +17,9 @@ class SongService
     {
         return $this->songStorage->loadRandomSong();
     }
+
+    public function getSongById(int $songId): SongModel
+    {
+        return $this->songStorage->loadSongById($songId);
+    }
 }

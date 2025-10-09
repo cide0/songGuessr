@@ -345,6 +345,25 @@ body{
     background-color: rgba(22, 114, 55, 0.5);
     border: var(--main-color) 0.13rem dashed;
     color: var(--main-color);
+    animation: wiggle 0.3s ease-in-out 0s 1;
+}
+
+@keyframes wiggle {
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(5deg);
+    }
+    25%{
+        transform: rotate(10deg);
+    }
+    75%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
 }
 
 .hint-placeholder-plus{

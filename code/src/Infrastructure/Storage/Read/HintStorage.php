@@ -2,6 +2,7 @@
 
 namespace songguessr\Infrastructure\Storage\Read;
 
+use PDO;
 use songguessr\Domain\Exception\SongGuessrException;
 use songguessr\Domain\Model\HintModel;
 use songguessr\Infrastructure\Storage\MySqlClient;
@@ -24,16 +25,16 @@ class HintStorage
         $statement->bindValue('sequenceNumber', $sequenceNumber);
         $statement->bindValue('songId', $songId);
         $statement->execute();
-        $result = $statement->fetchAll();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
         $this->mySqlClient->closeConnection();
 
-        if(empty($result[0])) {
+        if(empty($result)) {
             throw new SongGuessrException(
                 "No hint with sequence number $sequenceNumber for song with id $songId found!",
                 404
             );
         }
 
-        return new HintModel($result[0]);
+        return new HintModel($result);
     }
 }
