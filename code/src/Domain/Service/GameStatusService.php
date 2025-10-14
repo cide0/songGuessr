@@ -23,4 +23,14 @@ class GameStatusService
     {
         return $this->gameStatusStorage->getCurrentSongId();
     }
+
+    public function updateCurrentSong(int $songId): void
+    {
+        $this->gameStatusPersist->updateCurrentSong($songId);
+    }
+
+    public function clearGameStatus()
+    {
+        $this->gameStatusPersist->clearGameStatus();
+    }
 }

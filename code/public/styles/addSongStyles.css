@@ -1,0 +1,87 @@
+@font-face {
+    font-family: "Poppins";
+    src: url('../assets/fonts/Poppins/Poppins-Regular.ttf');
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+#header-container{
+    position: fixed;
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+#add-song-form{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: center;
+    align-content: center;
+}
+
+.form-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.form-row-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#add-song-button{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-radius: 120px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#add-song-button:focus {
+    outline: none;
+}
+
+#add-song-button:active {
+    outline: none;
+    border: none;
+}
+
+#add-song-button:hover{
+    background-color: var(--button-hover-color);
+}

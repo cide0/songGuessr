@@ -5,7 +5,7 @@ namespace songguessr\Application\Handler;
 use songguessr\Domain\Model\SongModel;
 use songguessr\Domain\Service\SongService;
 
-class GetSongHandler
+class SongHandler
 {
     public function __construct(
         private SongService $songService
@@ -21,5 +21,15 @@ class GetSongHandler
     public function handleGetSongById(int $songId): SongModel
     {
         return $this->songService->getSongById($songId);
+    }
+
+    public function handleAddSong(array $formData): void
+    {
+        $this->songService->addSong($formData);
+    }
+
+    public function handleSetSongAsGuessed(int $songId): void
+    {
+        $this->songService->setSongAsGuessed($songId);
     }
 }

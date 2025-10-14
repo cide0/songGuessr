@@ -2,10 +2,15 @@ import {FetchWrapper} from "./Utility/FetchWrapper.js";
 import {SongView} from "./View/SongView.js";
 import {HintView} from "./View/HintView.js";
 import {StartGameView} from "./View/StartGameView.js";
+import {GameNavbarView} from "./View/GameNavbarView.js";
+import {Div} from "./Elements/Div.js";
+import {DomParser} from "./Utility/DomParser.js";
+import {EndGameView} from "./View/EndGameView.js";
 
 export class Application{
 
     fetchWrapper = new FetchWrapper();
+    domParser = new DomParser();
 
     constructor(){
     }
@@ -22,10 +27,34 @@ export class Application{
 
     async startGame(){
         let song = await this.fetchWrapper.get('/start');
-        await this.runGame(song);
+        if(await this.isValid(song)) {
+            await this.runGame(song);
+        }
+    }
+
+    async loadNextSong(previousSongId){
+        await this.fetchWrapper.get('/songs/' + previousSongId + '/guessed');
+
+        let previousGameContainer = new Div('game-container');
+        previousGameContainer.remove();
+
+        let newGameContainer = this.domParser.createElement('div')
+        newGameContainer.setAttribute('id', 'game-container');
+        document.body.appendChild(newGameContainer);
+
+        let song = await this.fetchWrapper.get('/songs/random');
+        if(await this.isValid(song)) {
+            await this.fetchWrapper.get('/songs/' + song.id + '/current');
+            await this.runGame(song);
+        }
     }
 
     async runGame(song) {
+        this.playSoundForNextSong();
+
+        let gameNavbarView = new GameNavbarView(song);
+        gameNavbarView.render();
+
         let songView = new SongView(song);
         songView.render();
 
@@ -33,7 +62,26 @@ export class Application{
         hintView.render();
     }
 
-    async loadSong() {
-        return await this.fetchWrapper.get('/songs/random');
+    async isValid(song) {
+        if(song.errors !== undefined) {
+            await this.fetchWrapper.get('/clear');
+
+            let endGameView = new EndGameView();
+            endGameView.render();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    playSoundForNextSong() {
+        let nextSongAudio = this.domParser.createElement('audio');
+        nextSongAudio.setAttribute('src', './../public/assets/audio/next-song-sound.mp3');
+        if (nextSongAudio.paused) {
+            nextSongAudio.play();
+        }else{
+            nextSongAudio.currentTime = 0
+        }
     }
 }

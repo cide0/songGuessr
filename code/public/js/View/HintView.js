@@ -17,6 +17,7 @@ export class HintView extends View{
 
     render() {
         this.renderContainer('hint-container');
+        this.renderUiAudioElements();
         this.renderHeader();
         this.renderHintPlaceholders();
     }
@@ -73,6 +74,13 @@ export class HintView extends View{
 
     setEventListenerForHintLoading(hintElement, sequence) {
         hintElement.addEventListener('click', async () => {
+            let addHintAudio = document.getElementById('add-hint-audio');
+            if (addHintAudio.paused) {
+                addHintAudio.play();
+            }else{
+                addHintAudio.currentTime = 0
+            }
+
             let hint = await this.fetchWrapper.get('/songs/' + this.song.id + '/hints/' + sequence);
             let mappedHint = this.hintMapper.mapByType(hint);
             mappedHint.set();
@@ -86,5 +94,12 @@ export class HintView extends View{
             newHintCounter.innerHTML = this.loadedHints + '|' + this.maxHints;
             hintHeaderContainer.appendChild(newHintCounter);
         }, {once: true});
+    }
+
+    renderUiAudioElements() {
+        let addHintAudio = this.domParser.createElement('audio');
+        addHintAudio.setAttribute('id', 'add-hint-audio');
+        addHintAudio.setAttribute('src', './../public/assets/audio/add-hint-sound.mp3');
+        this.gameContainer.appendChild(addHintAudio);
     }
 }

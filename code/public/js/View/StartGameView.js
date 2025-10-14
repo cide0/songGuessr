@@ -19,8 +19,8 @@ export class StartGameView extends View{
             let startContainer = new Div('start-container');
             startContainer.remove();
 
-            let app = new Application();
-            await app.startGame();
+            let application = new Application();
+            await application.startGame();
         });
 
         let startContainer = new Div('start-container');

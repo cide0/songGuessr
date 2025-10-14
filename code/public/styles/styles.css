@@ -23,6 +23,13 @@ body{
     position: relative;
 }
 
+.disabled-button{
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    color: var(--input-placeholder-color) !important;
+    background-color: var(--input-color) !important;
+}
+
 #start-container{
     position: fixed;
     top: 50%;
@@ -68,6 +75,123 @@ body{
     font-size: 2.6rem;
     font-weight: bold;
     color: var(--main-color);
+}
+
+#game-navbar-container{
+    position: fixed;
+    top: 4%;
+    width: 100%;
+    z-index: 2;
+}
+
+#game-navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2.5rem;
+}
+
+#game-navbar-right-container{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+
+#song-guess-input:focus{
+    outline: none;
+    border: none;
+}
+
+#restart-game-btn{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-radius: 120px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#restart-game-btn:focus {
+    outline: none;
+}
+
+#restart-game-btn:active {
+    outline: none;
+    border: none;
+}
+
+#restart-game-btn:hover{
+    background-color: var(--button-hover-color);
+}
+
+#reveal-btn{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-radius: 120px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#reveal-btn:focus {
+    outline: none;
+}
+
+#reveal-btn:active {
+    outline: none;
+    border: none;
+}
+
+#reveal-btn:hover{
+    background-color: var(--button-hover-color);
+}
+
+#next-song-btn{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-radius: 120px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#next-song-btn:focus {
+    outline: none;
+}
+
+#next-song-btn:active {
+    outline: none;
+    border: none;
+}
+
+#next-song-btn:hover{
+    background-color: var(--button-hover-color);
 }
 
 #song-container{
@@ -387,4 +511,50 @@ body{
     height: 100%;
     object-fit: cover;
     border-radius: 15px;
+}
+
+#end-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+}
+
+#end-message-container{
+    font-size: 1.5rem;
+    color: var(--input-placeholder-color);
+}
+
+#restart-btn{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-radius: 120px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.8rem 1.8rem;
+    font-size: 1.5rem;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#restart-btn:focus {
+    outline: none;
+}
+
+#restart-btn:active {
+    outline: none;
+    border: none;
+}
+
+#restart-btn:hover{
+    background-color: var(--button-hover-color);
 }

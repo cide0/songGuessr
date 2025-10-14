@@ -5,7 +5,7 @@ namespace songguessr\Domain\Model;
 class PickerModel
 {
     public function __construct(
-        private int $id,
+        private ?int $id,
         private string $firstName,
         private string $lastName
     )
@@ -14,13 +14,13 @@ class PickerModel
     public static function fromSongData(array $data): self
     {
         return new self(
-            $data['picked_by'],
+            $data['picked_by'] ?? null,
             $data['first_name'],
             $data['last_name']
         );
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

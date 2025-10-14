@@ -4,29 +4,31 @@ namespace songguessr\Domain\Model;
 
 class SongModel
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $artist;
-    private bool $guessed;
+    private ?bool $guessed;
     private PickerModel $picker;
-    private ?string $audioSource;
+    private string $audioSource;
     private ?string $videoSource;
     private ?string $album;
     private ?string $albumCoverSource;
+    private ?int $released;
 
     public function __construct(array $data) {
-        $this->id = $data['song_id'];
+        $this->id = $this->extractSongId($data);
         $this->name = $data['name'];
         $this->artist = $data['artist'];
-        $this->guessed = (bool) $data['guessed'];
+        $this->guessed = $this->extractGuessed($data);
         $this->picker = PickerModel::fromSongData($data);
-        $this->audioSource = $this->extractAudioSource($data);
+        $this->audioSource = $data['audio_source'];
         $this->videoSource = $this->extractVideoSource($data);
         $this->album = $this->extractAlbum($data);
         $this->albumCoverSource = $this->extractAlbumCoverSource($data);
+        $this->released = $this->extractReleased($data);
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -51,7 +53,7 @@ class SongModel
         return $this->picker;
     }
 
-    public function getAudioSource(): ?string
+    public function getAudioSource(): string
     {
         return $this->audioSource;
     }
@@ -71,13 +73,9 @@ class SongModel
         return $this->albumCoverSource;
     }
 
-    private function extractAudioSource(array $data): ?string
+    public function getReleased(): ?int
     {
-        if(isset($data['audio_source'])) {
-            return $data['audio_Source'];
-        }
-
-        return null;
+        return $this->released;
     }
 
     private function extractVideoSource(array $data): ?string
@@ -102,6 +100,33 @@ class SongModel
     {
         if(isset($data['album_cover_source'])) {
             return $data['album_cover_source'];
+        }
+
+        return null;
+    }
+
+    private function extractReleased(array $data): ?int
+    {
+        if(isset($data['released'])) {
+            return $data['released'];
+        }
+
+        return null;
+    }
+
+    private function extractSongId(array $data): ?int
+    {
+        if(isset($data['song_id'])) {
+            return $data['song_id'];
+        }
+
+        return null;
+    }
+
+    private function extractGuessed(array $data): ?bool
+    {
+        if(isset($data['guessed'])) {
+            return (bool) $data['guessed'];
         }
 
         return null;

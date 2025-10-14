@@ -21,4 +21,14 @@ class GameStatusHandler
     {
         return $this->gameStatusService->getCurrentSongId();
     }
+
+    public function handleUpdateCurrentSong(int $songId): void
+    {
+        $this->gameStatusService->updateCurrentSong($songId);
+    }
+
+    public function handleClearGameStatus(): void
+    {
+        $this->gameStatusService->clearGameStatus();
+    }
 }

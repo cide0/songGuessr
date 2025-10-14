@@ -4,13 +4,15 @@ namespace songguessr;
 
 use songguessr\Application\Handler\GameStatusHandler;
 use songguessr\Application\Handler\GetHintHandler;
-use songguessr\Application\Handler\GetSongHandler;
+use songguessr\Application\Handler\SongHandler;
 use songguessr\Domain\Service\GameStatusService;
 use songguessr\Domain\Service\HintService;
 use songguessr\Domain\Service\SongService;
 use songguessr\Infrastructure\Controller\SongGuessrController;
 use songguessr\Infrastructure\Storage\MySqlClient;
 use songguessr\Infrastructure\Storage\Persist\GameStatusPersist;
+use songguessr\Infrastructure\Storage\Persist\PickerPersist;
+use songguessr\Infrastructure\Storage\Persist\SongPersist;
 use songguessr\Infrastructure\Storage\Read\GameStatusStorage;
 use songguessr\Infrastructure\Storage\Read\HintStorage;
 use songguessr\Infrastructure\Storage\Read\SongStorage;
@@ -25,7 +27,7 @@ class Factory
     public function createSongGuessrController(): SongGuessrController
     {
         return new SongGuessrController(
-            new GetSongHandler($this->createSongService()),
+            new SongHandler($this->createSongService()),
             new GetHintHandler($this->createHintService()),
             new GameStatusHandler($this->createGameStatusService())
         );
@@ -34,7 +36,9 @@ class Factory
     private function createSongService(): SongService
     {
         return new SongService(
-            $this->createSongStorage()
+            $this->createSongStorage(),
+            $this->createPickerPersist(),
+            $this->createSongPersist()
         );
     }
 
@@ -87,6 +91,20 @@ class Factory
     private function createGameStatusStorage(): GameStatusStorage
     {
         return new GameStatusStorage(
+            $this->createMySqlClient()
+        );
+    }
+
+    private function createPickerPersist(): PickerPersist
+    {
+        return new PickerPersist(
+            $this->createMySqlClient()
+        );
+    }
+
+    private function createSongPersist(): SongPersist
+    {
+        return new SongPersist(
             $this->createMySqlClient()
         );
     }

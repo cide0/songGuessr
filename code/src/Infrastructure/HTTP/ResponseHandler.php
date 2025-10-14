@@ -9,7 +9,7 @@ class ResponseHandler
 {
     public static function handle(
         ResponseInterface $response,
-        ViewModel $viewModel,
+        ViewModel|array $viewModel,
         int $responseCode
     ): ResponseInterface {
         $response->getBody()->write(json_encode($viewModel, JSON_THROW_ON_ERROR));

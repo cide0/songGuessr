@@ -1,4 +1,4 @@
 import {Application} from "./Application.js";
 
-let app = new Application();
-await app.init();
+let application = new Application();
+await application.init();

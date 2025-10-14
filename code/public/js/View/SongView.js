@@ -6,6 +6,8 @@ import {PlayerPlaceholder} from "../Elements/PlayerPlaceholder.js";
 export class SongView extends View{
 
     guessInputPlaceholder = 'Enter guess here';
+    guessTypePlayer = 'player';
+    guessTypeSong = 'song';
 
     constructor(song) {
         super();
@@ -16,9 +18,9 @@ export class SongView extends View{
         this.renderContainer('song-container');
         this.renderUiAudioElements();
         this.renderSongName();
-        this.renderGuess('song');
+        this.renderGuess(this.guessTypeSong);
         this.renderPlayerName();
-        this.renderGuess('player');
+        this.renderGuess(this.guessTypePlayer);
     }
 
     renderSongName(){
@@ -67,7 +69,7 @@ export class SongView extends View{
         let userGuess = guessInput.value;
 
         let guessedTypeValue = this.song.name;
-        if(type === 'player') {
+        if(type === this.guessTypePlayer) {
             guessedTypeValue = this.song.picker.firstName;
         }
 
@@ -92,6 +94,18 @@ export class SongView extends View{
             for (let i = 0; i < guessedTypeValue.length; i++) {
                 placeholderChildren[i].innerHTML = guessedTypeValue[i];
             }
+
+            if(type === this.guessTypeSong) {
+                let nextSongButton = document.getElementById('next-song-btn');
+                nextSongButton.classList.remove('disabled-button');
+
+                let revealButton = document.getElementById('reveal-btn');
+                revealButton.classList.add('disabled-button');
+            }
+
+            let guessButton = document.getElementById(type + '-guess-button');
+            guessButton.classList.add('disabled-button');
+            guessInput.disabled = true;
         } else {
             let failureAudio = document.getElementById('failure-audio');
             if (failureAudio.paused) {

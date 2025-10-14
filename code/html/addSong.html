@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SongGuessr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./../public/assets/icons/favicon.png">
+    <link rel="stylesheet" href="./../public/styles/colors.css">
+    <link rel="stylesheet" href="./../public/styles/addSongStyles.css">
+</head>
+<body>
+<div id="header-container">SongGuessr</div>
+<div id="add-song-container">
+    <form id="add-song-form" action="http://localhost:88/songguessr/songs/add" method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <label for="song-title">Song Title:</label>
+            <input type="text" id="song-title" name="name" required>
+        </div>
+        <div class="form-row">
+            <label for="artist-name">Artist Name:</label>
+            <input type="text" id="artist-name" name="artist" required>
+        </div>
+        <div class="form-row">
+            <label for="album-name">Album Name</label>
+            <input type="text" id="album-name" name="album">
+        </div>
+        <div class="form-row">
+            <label for="audio-file">Audio file name</label>
+            <input type="text" id="audio-file" name="audio_source" required>
+        </div>
+        <div class="form-row">
+            <label for="video-link">Youtube video link</label>
+            <input type="text" id="video-link" name="video_source">
+        </div>
+        <div class="form-row">
+            <label for="album-cover">Album cover name</label>
+            <input type="text" id="album-cover" name="album_cover_source">
+        </div>
+        <div class="form-row">
+            <label for="released">Release year</label>
+            <input type="number" id="released" name="released">
+        </div>
+        <div class="form-row">
+            <label for="picker-first-name">Picker first name</label>
+            <input type="text" id="picker-first-name" name="first_name" required>
+        </div>
+        <div class="form-row">
+            <label for="picker-last-name">Picker last name</label>
+            <input type="text" id="picker-last-name" name="last_name" required>
+        </div>
+        <div class="form-row-button">
+            <button type="submit" id="add-song-button">Add Song</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

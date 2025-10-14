@@ -26,7 +26,8 @@ class SongViewModel implements ViewModel
             'audioSource' => $this->songModel->getAudioSource(),
             'videoSource' => $this->songModel->getVideoSource(),
             'album' => $this->songModel->getAlbum(),
-            'albumCoverSource' => $this->songModel->getAlbumCoverSource()
+            'albumCoverSource' => $this->songModel->getAlbumCoverSource(),
+            'released' => $this->songModel->getReleased(),
         ];
     }
 }

@@ -21,4 +21,25 @@ class GameStatusPersist
         $statement->execute();
         $this->mySqlClient->closeConnection();
     }
+
+    public function updateCurrentSong(int $songId): void
+    {
+        $connection = $this->mySqlClient->connect();
+        $statement = $connection->prepare(
+            'UPDATE game_status SET current_song_id = :songId'
+        );
+        $statement->bindValue('songId', $songId);
+        $statement->execute();
+        $this->mySqlClient->closeConnection();
+    }
+
+    public function clearGameStatus(): void
+    {
+        $connection = $this->mySqlClient->connect();
+        $statement = $connection->prepare(
+            'DELETE FROM game_status'
+        );
+        $statement->execute();
+        $this->mySqlClient->closeConnection();
+    }
 }
