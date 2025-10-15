@@ -5,7 +5,7 @@ namespace songguessr\Application\Handler;
 use songguessr\Domain\Model\HintModel;
 use songguessr\Domain\Service\HintService;
 
-class GetHintHandler
+class HintHandler
 {
     public function __construct(
         private HintService $hintService
@@ -16,5 +16,10 @@ class GetHintHandler
     public function handleGetSongHintBySequenceNumber(int $songId, int $sequenceNumber): HintModel
     {
         return $this->hintService->getSongHintBySequenceNumber($songId, $sequenceNumber);
+    }
+
+    public function handleClearHints(): void
+    {
+        $this->hintService->clearHints();
     }
 }

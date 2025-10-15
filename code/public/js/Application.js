@@ -35,12 +35,7 @@ export class Application{
     async loadNextSong(previousSongId){
         await this.fetchWrapper.get('/songs/' + previousSongId + '/guessed');
 
-        let previousGameContainer = new Div('game-container');
-        previousGameContainer.remove();
-
-        let newGameContainer = this.domParser.createElement('div')
-        newGameContainer.setAttribute('id', 'game-container');
-        document.body.appendChild(newGameContainer);
+        this.resetView();
 
         let song = await this.fetchWrapper.get('/songs/random');
         if(await this.isValid(song)) {
@@ -83,5 +78,22 @@ export class Application{
         }else{
             nextSongAudio.currentTime = 0
         }
+    }
+
+    async restartGame() {
+        await this.fetchWrapper.get('/clear');
+        await this.fetchWrapper.get('/hints/clear');
+        await this.fetchWrapper.get('/songs/reset');
+        this.resetView();
+        await this.init();
+    }
+
+    resetView() {
+        let previousGameContainer = new Div('game-container');
+        previousGameContainer.remove();
+
+        let newGameContainer = this.domParser.createElement('div')
+        newGameContainer.setAttribute('id', 'game-container');
+        document.body.appendChild(newGameContainer);
     }
 }

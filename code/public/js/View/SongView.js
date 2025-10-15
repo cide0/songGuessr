@@ -19,8 +19,10 @@ export class SongView extends View{
         this.renderUiAudioElements();
         this.renderSongName();
         this.renderGuess(this.guessTypeSong);
-        this.renderPlayerName();
-        this.renderGuess(this.guessTypePlayer);
+        if(this.song.picker !== undefined) {
+            this.renderPlayerName();
+            this.renderGuess(this.guessTypePlayer);
+        }
     }
 
     renderSongName(){

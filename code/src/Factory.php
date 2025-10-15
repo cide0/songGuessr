@@ -3,7 +3,7 @@
 namespace songguessr;
 
 use songguessr\Application\Handler\GameStatusHandler;
-use songguessr\Application\Handler\GetHintHandler;
+use songguessr\Application\Handler\HintHandler;
 use songguessr\Application\Handler\SongHandler;
 use songguessr\Domain\Service\GameStatusService;
 use songguessr\Domain\Service\HintService;
@@ -11,6 +11,7 @@ use songguessr\Domain\Service\SongService;
 use songguessr\Infrastructure\Controller\SongGuessrController;
 use songguessr\Infrastructure\Storage\MySqlClient;
 use songguessr\Infrastructure\Storage\Persist\GameStatusPersist;
+use songguessr\Infrastructure\Storage\Persist\HintPersist;
 use songguessr\Infrastructure\Storage\Persist\PickerPersist;
 use songguessr\Infrastructure\Storage\Persist\SongPersist;
 use songguessr\Infrastructure\Storage\Read\GameStatusStorage;
@@ -28,7 +29,7 @@ class Factory
     {
         return new SongGuessrController(
             new SongHandler($this->createSongService()),
-            new GetHintHandler($this->createHintService()),
+            new HintHandler($this->createHintService()),
             new GameStatusHandler($this->createGameStatusService())
         );
     }
@@ -62,7 +63,8 @@ class Factory
     private function createHintService(): HintService
     {
         return new HintService(
-            $this->createHintStorage()
+            $this->createHintStorage(),
+            $this->createHintPersist()
         );
     }
 
@@ -105,6 +107,13 @@ class Factory
     private function createSongPersist(): SongPersist
     {
         return new SongPersist(
+            $this->createMySqlClient()
+        );
+    }
+
+    private function createHintPersist(): HintPersist
+    {
+        return new HintPersist(
             $this->createMySqlClient()
         );
     }

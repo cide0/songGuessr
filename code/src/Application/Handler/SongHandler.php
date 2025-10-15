@@ -32,4 +32,9 @@ class SongHandler
     {
         $this->songService->setSongAsGuessed($songId);
     }
+
+    public function handleResetSongs(): void
+    {
+        $this->songService->resetSongs();
+    }
 }

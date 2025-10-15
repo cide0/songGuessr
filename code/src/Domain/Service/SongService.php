@@ -31,7 +31,10 @@ class SongService
     {
         $songModel = new SongModel($formData);
 
-        $pickerId = $this->pickerPersist->persistPicker($songModel->getPicker());
+        $pickerId = null;
+        if($songModel->getPicker() !== null) {
+            $pickerId = $this->pickerPersist->persistPicker($songModel->getPicker());
+        }
 
         $this->songPersist->persistSong($songModel, $pickerId);
     }
@@ -39,5 +42,10 @@ class SongService
     public function setSongAsGuessed(int $songId)
     {
         $this->songPersist->updateSongGuessedStatus($songId, 1);
+    }
+
+    public function resetSongs(): void
+    {
+        $this->songPersist->resetGuessedStatusForAllSongs();
     }
 }

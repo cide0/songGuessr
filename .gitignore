@@ -1,6 +1,8 @@
 .idea
-code/vendor
+/code/vendor
 /database/
 /code/tests/phpunit.coverage.xml
 /code/tests/phpunit.report.xml
 /code/tests/.phpunit.result.cache
+/code/public/assets/video
+/code/public/assets/audio/song_audio

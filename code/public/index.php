@@ -59,6 +59,10 @@ $slimApp->group('/songguessr', function (RouteCollectorProxy $group) {
         '/clear',
         SongGuessrController::class . ':clearGameStatus'
     );
+    $group->get(
+        '/hints/clear',
+        SongGuessrController::class . ':clearHints'
+    );
     $group->group('/songs', function (RouteCollectorProxy $group) {
         $group->get(
             '/random',
@@ -68,6 +72,11 @@ $slimApp->group('/songguessr', function (RouteCollectorProxy $group) {
         $group->get(
             '/current',
             SongGuessrController::class . ':getCurrentSong'
+        );
+
+        $group->get(
+            '/reset',
+            SongGuessrController::class . ':resetSongs'
         );
 
         $group->get(

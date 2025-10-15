@@ -17,17 +17,22 @@ class SongViewModel implements ViewModel
 
     public function jsonSerialize(): array
     {
-        return [
+        $serialized = [
             'id' => $this->songModel->getId(),
             'name' => $this->songModel->getName(),
             'artist' => $this->songModel->getArtist(),
             'guessed' => $this->songModel->isGuessed(),
-            'picker' => PickerViewModel::fromPickerModel($this->songModel->getPicker()),
             'audioSource' => $this->songModel->getAudioSource(),
             'videoSource' => $this->songModel->getVideoSource(),
             'album' => $this->songModel->getAlbum(),
             'albumCoverSource' => $this->songModel->getAlbumCoverSource(),
             'released' => $this->songModel->getReleased(),
         ];
+
+        if($this->songModel->getPicker() !== null) {
+            $serialized['picker'] = PickerViewModel::fromPickerModel($this->songModel->getPicker());
+        }
+
+        return $serialized;
     }
 }

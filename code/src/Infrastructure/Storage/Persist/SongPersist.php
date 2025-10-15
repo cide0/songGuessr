@@ -11,7 +11,7 @@ class SongPersist
     {
     }
 
-    public function persistSong(SongModel $songModel, int $pickerId): void
+    public function persistSong(SongModel $songModel, ?int $pickerId): void
     {
         $connection = $this->mySqlClient->connect();
         $statement = $connection->prepare(
@@ -38,6 +38,16 @@ class SongPersist
         );
         $statement->bindValue('guessed', $guessed);
         $statement->bindValue('songId', $songId);
+        $statement->execute();
+        $this->mySqlClient->closeConnection();
+    }
+
+    public function resetGuessedStatusForAllSongs(): void
+    {
+        $connection = $this->mySqlClient->connect();
+        $statement = $connection->prepare(
+            'UPDATE song SET guessed = 0'
+        );
         $statement->execute();
         $this->mySqlClient->closeConnection();
     }

@@ -5,7 +5,7 @@ namespace songguessr\Infrastructure\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use songguessr\Application\Handler\GameStatusHandler;
-use songguessr\Application\Handler\GetHintHandler;
+use songguessr\Application\Handler\HintHandler;
 use songguessr\Application\Handler\SongHandler;
 use songguessr\Domain\Exception\SongGuessrException;
 use songguessr\Infrastructure\HTTP\ResponseHandler;
@@ -18,7 +18,7 @@ class SongGuessrController
 
     public function __construct(
         private SongHandler       $songHandler,
-        private GetHintHandler    $getHintHandler,
+        private HintHandler       $hintHandler,
         private GameStatusHandler $gameStatusHandler
     )
     {
@@ -97,7 +97,7 @@ class SongGuessrController
         return ResponseHandler::handle(
             $response,
             HintViewModel::fromHintModel(
-                $this->getHintHandler->handleGetSongHintBySequenceNumber(
+                $this->hintHandler->handleGetSongHintBySequenceNumber(
                     (int) $args['songId'],
                     (int) $args['sequenceNumber']
                 )
@@ -153,6 +153,36 @@ class SongGuessrController
         return ResponseHandler::handle(
             $response,
             ['message' => "Song with id $songId has been set as current song"],
+            self::HTTP_OK
+        );
+    }
+
+    public function clearHints(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+
+        $this->hintHandler->handleClearHints();
+
+        return ResponseHandler::handle(
+            $response,
+            ['message' => "Hints have been cleared"],
+            self::HTTP_OK
+        );
+    }
+
+    public function resetSongs(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+
+        $this->songHandler->handleResetSongs();
+
+        return ResponseHandler::handle(
+            $response,
+            ['message' => "Songs guessed status have been reset"],
             self::HTTP_OK
         );
     }

@@ -8,7 +8,7 @@ class SongModel
     private string $name;
     private string $artist;
     private ?bool $guessed;
-    private PickerModel $picker;
+    private ?PickerModel $picker;
     private string $audioSource;
     private ?string $videoSource;
     private ?string $album;
@@ -20,7 +20,7 @@ class SongModel
         $this->name = $data['name'];
         $this->artist = $data['artist'];
         $this->guessed = $this->extractGuessed($data);
-        $this->picker = PickerModel::fromSongData($data);
+        $this->picker = $this->extractPicker($data);
         $this->audioSource = $data['audio_source'];
         $this->videoSource = $this->extractVideoSource($data);
         $this->album = $this->extractAlbum($data);
@@ -48,7 +48,7 @@ class SongModel
         return $this->guessed;
     }
 
-    public function getPicker(): PickerModel
+    public function getPicker(): ?PickerModel
     {
         return $this->picker;
     }
@@ -127,6 +127,15 @@ class SongModel
     {
         if(isset($data['guessed'])) {
             return (bool) $data['guessed'];
+        }
+
+        return null;
+    }
+
+    private function extractPicker(array $data): ?PickerModel
+    {
+        if(isset($data['picked_by'])) {
+            return PickerModel::fromSongData($data);
         }
 
         return null;

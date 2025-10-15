@@ -32,6 +32,12 @@ export class GameNavbarView extends View{
         let restartGameButton = this.domParser.createElement('a');
         restartGameButton.setAttribute('id', 'restart-game-btn');
         restartGameButton.innerHTML = 'Restart game';
+        restartGameButton.addEventListener('click', async () => {
+            if (confirm('Are you sure you want to restart the game?')) {
+                let application = new Application();
+                await application.restartGame();
+            }
+        });
 
         this.gameNavbar.appendChild(restartGameButton);
     }
