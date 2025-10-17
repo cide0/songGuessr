@@ -45,12 +45,22 @@ export class GameNavbarView extends View{
     renderNavbarRight() {
         let gameNavbarRightContainer = this.createContainer('game-navbar-right-container');
 
-        let revealButton = this.domParser.createElement('a');
-        revealButton.setAttribute('id', 'reveal-btn');
-        revealButton.innerHTML = 'Reveal';
-        revealButton.addEventListener('click', (e) => {
-            this.revealEventListener(e);
+        let revealSongButton = this.domParser.createElement('a');
+        revealSongButton.setAttribute('id', 'reveal-song-btn');
+        revealSongButton.innerHTML = 'Reveal song';
+        revealSongButton.addEventListener('click', (e) => {
+            this.revealSongEventListener(e);
         });
+
+        let revealPlayerButton = this.domParser.createElement('a');
+        revealPlayerButton.setAttribute('id', 'reveal-player-btn');
+        revealPlayerButton.innerHTML = 'Reveal player';
+        revealPlayerButton.addEventListener('click', (e) => {
+            this.revealPlayerEventListener(e);
+        });
+        if(this.song.picker === undefined) {
+            revealPlayerButton.style.display = 'none';
+        }
 
         let nextSongButton = this.domParser.createElement('a');
         nextSongButton.setAttribute('id', 'next-song-btn');
@@ -61,12 +71,13 @@ export class GameNavbarView extends View{
             await application.loadNextSong(this.song.id);
         });
 
-        gameNavbarRightContainer.appendChild(revealButton);
+        gameNavbarRightContainer.appendChild(revealSongButton);
+        gameNavbarRightContainer.appendChild(revealPlayerButton);
         gameNavbarRightContainer.appendChild(nextSongButton);
         this.gameNavbar.appendChild(gameNavbarRightContainer);
     }
 
-    revealEventListener(e) {
+    revealSongEventListener(e) {
         let revealAudio = document.getElementById('reveal-audio');
         if (revealAudio.paused) {
             revealAudio.play();
@@ -86,6 +97,27 @@ export class GameNavbarView extends View{
         songGuessButton.classList.add('disabled-button');
         let songGuessInput = this.domParser.getById('song-guess-input');
         songGuessInput.disabled = true;
+        e.target.classList.add('disabled-button');
+    }
+
+    revealPlayerEventListener(e){
+        let revealAudio = document.getElementById('reveal-audio');
+        if (revealAudio.paused) {
+            revealAudio.play();
+        }else{
+            revealAudio.currentTime = 0
+        }
+
+        let playerPlaceholderContainer = new Div('player-placeholder-container');
+        let playerPlaceholderChildren = playerPlaceholderContainer.htmlElement.children;
+        for (let i = 0; i < this.song.picker.firstName.length; i++) {
+            playerPlaceholderChildren[i].innerHTML = this.song.picker.firstName[i];
+        }
+
+        let playerGuessButton = this.domParser.getById('player-guess-button');
+        playerGuessButton.classList.add('disabled-button');
+        let playerGuessInput = this.domParser.getById('player-guess-input');
+        playerGuessInput.disabled = true;
         e.target.classList.add('disabled-button');
     }
 }

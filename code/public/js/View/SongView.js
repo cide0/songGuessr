@@ -100,10 +100,10 @@ export class SongView extends View{
             if(type === this.guessTypeSong) {
                 let nextSongButton = document.getElementById('next-song-btn');
                 nextSongButton.classList.remove('disabled-button');
-
-                let revealButton = document.getElementById('reveal-btn');
-                revealButton.classList.add('disabled-button');
             }
+
+            let revealButton = document.getElementById('reveal-' + type + '-btn');
+            revealButton.classList.add('disabled-button');
 
             let guessButton = document.getElementById(type + '-guess-button');
             guessButton.classList.add('disabled-button');

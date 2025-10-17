@@ -37,7 +37,6 @@ CREATE TABLE `game_status` (
 
 LOCK TABLES `game_status` WRITE;
 /*!40000 ALTER TABLE `game_status` DISABLE KEYS */;
-INSERT INTO `game_status` VALUES (1,3,'2025-10-17 17:15:31');
 /*!40000 ALTER TABLE `game_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +77,7 @@ CREATE TABLE `picker` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   PRIMARY KEY (`picker_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +86,7 @@ CREATE TABLE `picker` (
 
 LOCK TABLES `picker` WRITE;
 /*!40000 ALTER TABLE `picker` DISABLE KEYS */;
-INSERT INTO `picker` VALUES (1,'Elias','Böhm'),(3,'test','test'),(4,'test2','test2');
+INSERT INTO `picker` VALUES (1,'Elias','Böhm'),(6,'Martina','Böhm');
 /*!40000 ALTER TABLE `picker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +114,7 @@ CREATE TABLE `song` (
   UNIQUE KEY `song_pk_2` (`name`,`artist`),
   KEY `song_picker_id_fk` (`picked_by`),
   CONSTRAINT `song_picker_picker_id_fk` FOREIGN KEY (`picked_by`) REFERENCES `picker` (`picker_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +123,7 @@ CREATE TABLE `song` (
 
 LOCK TABLES `song` WRITE;
 /*!40000 ALTER TABLE `song` DISABLE KEYS */;
-INSERT INTO `song` VALUES (1,'Beat it','Michael Jackson',0,1,'test.mp3',NULL,NULL,NULL,1000,NULL,NULL),(2,'Pink + White','Frank Ocean',0,1,'pink_white.mp3','pink_white.mp4','Blonde','blonde.jpg',2016,'r&b','frank-ocean.webp'),(3,'White Ferrari','Frank Ocean',0,1,'test.mp3',NULL,NULL,'blonde.jpg',1000,NULL,NULL),(4,'test','test',0,NULL,'test','test','test','test',1000,NULL,NULL),(5,'Elias','elias',0,NULL,'elias','elias','elias','elias',23,NULL,NULL),(8,'test2','test2',0,4,'test2','test2','test2','test2',232,'test2','test2');
+INSERT INTO `song` VALUES (1,'Beat it','Michael Jackson',0,NULL,'beat_it.mp3','beat_it.mp4','Thriller','thriller.png',1982,'pop','michael-jackson.jpeg'),(2,'Pink + White','Frank Ocean',0,1,'pink_white.mp3','pink_white.mp4','Blonde','blonde.jpg',2016,'r&b','frank-ocean.webp'),(9,'Thriller','Michael Jackson',0,NULL,'thriller.mp3','thriller.mp4','Thriller','thriller.png',1982,'pop','michael-jackson.jpeg'),(10,'Hymn for the Weekend','Coldplay',0,6,'hymn_for_the_weekend.mp3','hymn_for_the_weekend.mp4','A Head Full of Dreams','a_head_full_of_dreams.jpg',2015,'alternative','coldplay.jpeg'),(11,'Mockingbird','Eminem',0,NULL,'mockingbird.mp3','mockingbird.mp4','Encore','encore.jpg',2004,'rap','eminem.jpg');
 /*!40000 ALTER TABLE `song` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +145,7 @@ CREATE TABLE `song_hint` (
   UNIQUE KEY `song_hint_song_id_order_uindex` (`song_id`,`sequence`),
   CONSTRAINT `song_hint_hint_id_fk` FOREIGN KEY (`hint_id`) REFERENCES `hint` (`hint_id`),
   CONSTRAINT `song_hint_song_id_fk` FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=352 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +154,7 @@ CREATE TABLE `song_hint` (
 
 LOCK TABLES `song_hint` WRITE;
 /*!40000 ALTER TABLE `song_hint` DISABLE KEYS */;
-INSERT INTO `song_hint` VALUES (187,1,10,1,NULL),(188,1,2,2,NULL),(189,1,7,3,NULL),(190,1,9,4,NULL),(191,1,4,5,NULL),(192,2,9,1,NULL),(193,2,12,2,NULL),(194,2,11,3,NULL),(195,2,6,4,NULL),(196,2,4,5,NULL),(197,3,10,1,NULL),(198,3,7,2,NULL),(199,3,2,3,NULL),(200,3,1,4,NULL),(201,3,4,5,NULL),(202,4,8,1,NULL),(203,4,1,2,NULL),(204,4,6,3,NULL),(205,4,2,4,NULL),(206,4,4,5,NULL),(207,5,10,1,NULL),(208,5,7,2,NULL),(209,5,8,3,NULL),(210,5,2,4,NULL),(211,5,4,5,NULL),(212,8,11,1,NULL),(213,8,12,2,NULL),(214,8,1,3,NULL),(215,8,8,4,NULL),(216,8,4,5,NULL);
+INSERT INTO `song_hint` VALUES (327,1,12,1,NULL),(328,1,7,2,NULL),(329,1,1,3,NULL),(330,1,9,4,NULL),(331,1,4,5,NULL),(332,2,7,1,NULL),(333,2,12,2,NULL),(334,2,1,3,NULL),(335,2,10,4,NULL),(336,2,4,5,NULL),(337,9,9,1,NULL),(338,9,6,2,NULL),(339,9,7,3,NULL),(340,9,8,4,NULL),(341,9,4,5,NULL),(342,10,10,1,NULL),(343,10,9,2,NULL),(344,10,2,3,NULL),(345,10,8,4,NULL),(346,10,4,5,NULL),(347,11,12,1,NULL),(348,11,10,2,NULL),(349,11,8,3,NULL),(350,11,7,4,NULL),(351,11,4,5,NULL);
 /*!40000 ALTER TABLE `song_hint` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-17 17:17:01
+-- Dump completed on 2025-10-17 23:11:02

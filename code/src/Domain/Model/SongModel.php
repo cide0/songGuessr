@@ -148,7 +148,7 @@ class SongModel
 
     private function extractPicker(array $data): ?PickerModel
     {
-        if(isset($data['picked_by']) || (isset($data['first_name']) && isset($data['last_name']))) {
+        if(isset($data['picked_by']) || (isset($data['first_name']) && $data['first_name'] !== '')) {
             return PickerModel::fromSongData($data);
         }
 

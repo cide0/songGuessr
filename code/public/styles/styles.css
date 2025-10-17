@@ -134,7 +134,7 @@ body{
     background-color: var(--button-hover-color);
 }
 
-#reveal-btn{
+#reveal-song-btn{
     color: var(--bg-color);
     background-color: var(--main-color);
     border-radius: 120px;
@@ -151,16 +151,46 @@ body{
     user-select: none;
 }
 
-#reveal-btn:focus {
+#reveal-song-btn:focus {
     outline: none;
 }
 
-#reveal-btn:active {
+#reveal-song-btn:active {
     outline: none;
     border: none;
 }
 
-#reveal-btn:hover{
+#reveal-song-btn:hover{
+    background-color: var(--button-hover-color);
+}
+
+#reveal-player-btn{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-radius: 120px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#reveal-player-btn:focus {
+    outline: none;
+}
+
+#reveal-player-btn:active {
+    outline: none;
+    border: none;
+}
+
+#reveal-player-btn:hover{
     background-color: var(--button-hover-color);
 }
 
