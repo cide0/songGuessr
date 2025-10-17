@@ -1,6 +1,6 @@
 # SongGuessr
 
-SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of clues.
+SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of hints.
 
 ## Documentation
 
