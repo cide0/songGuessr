@@ -60,8 +60,8 @@ $slimApp->group('/songguessr', function (RouteCollectorProxy $group) {
         SongGuessrController::class . ':clearGameStatus'
     );
     $group->get(
-        '/hints/clear',
-        SongGuessrController::class . ':clearHints'
+        '/hints/reroll',
+        SongGuessrController::class . ':rerollHints'
     );
     $group->group('/songs', function (RouteCollectorProxy $group) {
         $group->get(

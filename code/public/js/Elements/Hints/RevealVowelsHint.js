@@ -3,7 +3,7 @@ import {Div} from "../Div.js";
 
 export class RevealVowelsHint extends Hint{
 
-    vowelsRegex = /^[aeiouAEIOU]$/;
+    vowelsRegex = /^[aeiou]$/;
 
     constructor(hint, songName){
         super(hint);
@@ -11,11 +11,9 @@ export class RevealVowelsHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let revealVowelsLabelElement = document.createElement('div');
         revealVowelsLabelElement.classList.add('hint-text-label');
-        revealVowelsLabelElement.innerHTML = 'Revealed Vowels:';
+        revealVowelsLabelElement.innerHTML = 'Revealed vowels:';
 
         this.htmlElement.appendChild(revealVowelsLabelElement);
 
@@ -28,7 +26,7 @@ export class RevealVowelsHint extends Hint{
         let placeholderContainer = new Div('song-placeholder-container');
         let placeholderChildren = placeholderContainer.htmlElement.children;
         for (let i = 0; i < this.songName.length; i++) {
-            if(this.vowelsRegex.test(this.songName[i])) {
+            if(this.vowelsRegex.test(this.songName[i].toLowerCase())) {
                 placeholderChildren[i].innerHTML = this.songName[i];
             }
         }

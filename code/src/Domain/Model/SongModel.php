@@ -14,6 +14,8 @@ class SongModel
     private ?string $album;
     private ?string $albumCoverSource;
     private ?int $released;
+    private ?string $genre;
+    private ?string $artistImageSource;
 
     public function __construct(array $data) {
         $this->id = $this->extractSongId($data);
@@ -26,6 +28,8 @@ class SongModel
         $this->album = $this->extractAlbum($data);
         $this->albumCoverSource = $this->extractAlbumCoverSource($data);
         $this->released = $this->extractReleased($data);
+        $this->genre = $this->extractGenre($data);
+        $this->artistImageSource = $this->extractArtistImageSource($data);
     }
 
     public function getId(): ?int
@@ -76,6 +80,16 @@ class SongModel
     public function getReleased(): ?int
     {
         return $this->released;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function getArtistImageSource(): ?string
+    {
+        return $this->artistImageSource;
     }
 
     private function extractVideoSource(array $data): ?string
@@ -134,8 +148,26 @@ class SongModel
 
     private function extractPicker(array $data): ?PickerModel
     {
-        if(isset($data['picked_by'])) {
+        if(isset($data['picked_by']) || (isset($data['first_name']) && isset($data['last_name']))) {
             return PickerModel::fromSongData($data);
+        }
+
+        return null;
+    }
+
+    private function extractGenre(array $data): ?string
+    {
+        if(isset($data['genre'])) {
+            return $data['genre'];
+        }
+
+        return null;
+    }
+
+    private function extractArtistImageSource(array $data): ?string
+    {
+        if(isset($data['artist_image_source'])) {
+            return $data['artist_image_source'];
         }
 
         return null;

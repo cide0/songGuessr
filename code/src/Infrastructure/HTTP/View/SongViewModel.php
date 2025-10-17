@@ -27,6 +27,8 @@ class SongViewModel implements ViewModel
             'album' => $this->songModel->getAlbum(),
             'albumCoverSource' => $this->songModel->getAlbumCoverSource(),
             'released' => $this->songModel->getReleased(),
+            'genre' => $this->songModel->getGenre(),
+            'artistImageSource' => $this->songModel->getArtistImageSource()
         ];
 
         if($this->songModel->getPicker() !== null) {

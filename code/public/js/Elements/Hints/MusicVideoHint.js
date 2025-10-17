@@ -3,6 +3,7 @@ import {Hint} from "./Hint.js";
 export class MusicVideoHint extends Hint{
 
     videoPath = './../public/assets/video/music_videos/';
+    videoPlayDuration = 10; // in seconds
 
     constructor(hint, musicVideoSource){
         super(hint);
@@ -10,8 +11,6 @@ export class MusicVideoHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let musicVideoElement = document.createElement('video');
         musicVideoElement.setAttribute('id', 'music-video-element');
         musicVideoElement.setAttribute('src', this.videoPath + this.musicVideoSource);
@@ -20,12 +19,19 @@ export class MusicVideoHint extends Hint{
         musicVideoElement.muted = true;
         musicVideoElement.autoplay = true;
 
+        musicVideoElement.addEventListener('play', () => {
+            musicVideoElement.requestFullscreen();
+        });
+
         musicVideoElement.addEventListener('loadedmetadata', () => {
-            musicVideoElement.currentTime = 0;
+            let maxStartTime = Math.max(0, musicVideoElement.duration - this.videoPlayDuration);
+
+            musicVideoElement.currentTime = Math.random() * maxStartTime;
             musicVideoElement.play();
+
             setTimeout(() => {
                 musicVideoElement.pause();
-            }, 10000);
+            }, this.videoPlayDuration * 1000);
         });
 
         this.htmlElement.appendChild(musicVideoElement);

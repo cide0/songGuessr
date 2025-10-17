@@ -18,8 +18,9 @@ class HintHandler
         return $this->hintService->getSongHintBySequenceNumber($songId, $sequenceNumber);
     }
 
-    public function handleClearHints(): void
+    public function handleRerollHints(): void
     {
         $this->hintService->clearHints();
+        $this->hintService->generateHintsForAllSongs();
     }
 }

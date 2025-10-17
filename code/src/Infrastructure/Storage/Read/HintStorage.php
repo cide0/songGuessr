@@ -5,6 +5,7 @@ namespace songguessr\Infrastructure\Storage\Read;
 use PDO;
 use songguessr\Domain\Exception\SongGuessrException;
 use songguessr\Domain\Model\HintModel;
+use songguessr\Domain\Model\HintTypeMapModel;
 use songguessr\Infrastructure\Storage\MySqlClient;
 
 class HintStorage
@@ -36,5 +37,26 @@ class HintStorage
         }
 
         return new HintModel($result);
+    }
+
+    public function loadHintTypeMap(int $audioHintId): HintTypeMapModel
+    {
+        $connection = $this->mySqlClient->connect();
+        $statement = $connection->prepare(
+            'SELECT * FROM hint WHERE hint_id != :audioHintId' // Audio hint is default and not needed in the map
+        );
+        $statement->bindValue('audioHintId', $audioHintId);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->mySqlClient->closeConnection();
+
+        if(empty($result)) {
+            throw new SongGuessrException(
+                "No hints found!",
+                404
+            );
+        }
+
+        return new HintTypeMapModel($result);
     }
 }

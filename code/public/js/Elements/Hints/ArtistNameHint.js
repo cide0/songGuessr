@@ -7,8 +7,6 @@ export class ArtistNameHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let artistNameLabelElement = document.createElement('div');
         artistNameLabelElement.classList.add('hint-text-label');
         artistNameLabelElement.innerHTML = 'Artist:';

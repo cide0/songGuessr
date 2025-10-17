@@ -5,14 +5,14 @@ namespace songguessr\Domain\Model;
 class HintModel
 {
     private int $id;
-    private string $type;
+    private ?string $type;
     private int $songId;
     private int $sequence;
     private ?string $contentReplaceOne;
 
     public function __construct(array $data) {
         $this->id = $data['hint_id'];
-        $this->type = $data['type'];
+        $this->type = $this->extractType($data);
         $this->songId = $data['song_id'];
         $this->sequence = $data['sequence'];
         $this->contentReplaceOne = $this->extractContentReplaceOne($data);
@@ -23,7 +23,7 @@ class HintModel
         return $this->id;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -47,6 +47,15 @@ class HintModel
     {
         if(isset($data['content_replace_1'])) {
             return $data['content_replace_1'];
+        }
+
+        return null;
+    }
+
+    private function extractType(array $data): ?string
+    {
+        if(isset($data['type'])) {
+            return $data['type'];
         }
 
         return null;

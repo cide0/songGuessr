@@ -64,7 +64,8 @@ class Factory
     {
         return new HintService(
             $this->createHintStorage(),
-            $this->createHintPersist()
+            $this->createHintPersist(),
+            $this->createSongStorage()
         );
     }
 

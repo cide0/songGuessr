@@ -157,17 +157,17 @@ class SongGuessrController
         );
     }
 
-    public function clearHints(
+    public function rerollHints(
         ServerRequestInterface $request,
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
 
-        $this->hintHandler->handleClearHints();
+        $this->hintHandler->handleRerollHints();
 
         return ResponseHandler::handle(
             $response,
-            ['message' => "Hints have been cleared"],
+            ['message' => "Hints have been rerolled"],
             self::HTTP_OK
         );
     }

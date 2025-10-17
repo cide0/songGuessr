@@ -10,8 +10,6 @@ export class AlbumCoverHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let albumCoverImage = document.createElement('img');
         albumCoverImage.setAttribute('id', 'album-cover-hint-image');
         albumCoverImage.setAttribute('src', this.albumCoverPath + this.albumCoverSource);

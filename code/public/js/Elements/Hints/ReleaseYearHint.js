@@ -7,8 +7,6 @@ export class ReleaseYearHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let releaseYearLabelElement = document.createElement('div');
         releaseYearLabelElement.classList.add('hint-text-label');
         releaseYearLabelElement.innerHTML = 'Release year:';

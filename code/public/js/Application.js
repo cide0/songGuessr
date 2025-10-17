@@ -26,6 +26,7 @@ export class Application{
     }
 
     async startGame(){
+        await this.fetchWrapper.get('/hints/reroll');
         let song = await this.fetchWrapper.get('/start');
         if(await this.isValid(song)) {
             await this.runGame(song);
@@ -82,7 +83,6 @@ export class Application{
 
     async restartGame() {
         await this.fetchWrapper.get('/clear');
-        await this.fetchWrapper.get('/hints/clear');
         await this.fetchWrapper.get('/songs/reset');
         this.resetView();
         await this.init();

@@ -7,8 +7,6 @@ export class AlbumNameHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let albumNameLabelElement = document.createElement('div');
         albumNameLabelElement.classList.add('hint-text-label');
         albumNameLabelElement.innerHTML = 'Album Name:';

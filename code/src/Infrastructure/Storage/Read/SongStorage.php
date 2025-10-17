@@ -52,4 +52,30 @@ class SongStorage
 
         return new SongModel($result);
     }
+
+    /**
+     * @return SongModel[]
+     */
+    public function loadAllSongs(): array
+    {
+        $connection = $this->mySqlClient->connect();
+        $statement = $connection->query(
+            'SELECT * FROM song 
+                    LEFT JOIN picker ON song.picked_by = picker.picker_id'
+        );
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->mySqlClient->closeConnection();
+
+        if(empty($result)) {
+            throw new SongGuessrException('No songs found!', 404);
+        }
+
+        $songModels = [];
+        foreach ($result as $songData) {
+            $songModels[] = new SongModel($songData);
+        }
+
+        return $songModels;
+    }
 }

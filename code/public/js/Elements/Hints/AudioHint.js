@@ -10,8 +10,6 @@ export class AudioHint extends Hint{
     }
 
     set(){
-        this.htmlElement.innerHTML = '';
-
         let audioElement = document.createElement('audio');
         audioElement.setAttribute('id', 'audio-hint-element');
         audioElement.setAttribute('src', this.audioPath + this.audioSource);

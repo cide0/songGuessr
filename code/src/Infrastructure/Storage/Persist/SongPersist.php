@@ -15,8 +15,8 @@ class SongPersist
     {
         $connection = $this->mySqlClient->connect();
         $statement = $connection->prepare(
-            'INSERT INTO song (name, artist, guessed, picked_by, audio_source, video_source, album, album_cover_source, released)
-                    VALUES (:name, :artist, 0, :pickerId, :audioSource, :videoSource, :album, :albumCoverSource, :released)'
+            'INSERT INTO song (name, artist, guessed, picked_by, audio_source, video_source, album, album_cover_source, released, genre, artist_image_source)
+                    VALUES (:name, :artist, 0, :pickerId, :audioSource, :videoSource, :album, :albumCoverSource, :released, :genre, :artistImageSource)'
         );
         $statement->bindValue('name', $songModel->getName());
         $statement->bindValue('artist', $songModel->getArtist());
@@ -26,6 +26,8 @@ class SongPersist
         $statement->bindValue('album', $songModel->getAlbum());
         $statement->bindValue('albumCoverSource', $songModel->getAlbumCoverSource());
         $statement->bindValue('released', $songModel->getReleased());
+        $statement->bindValue('genre', $songModel->getGenre());
+        $statement->bindValue('artistImageSource', $songModel->getArtistImageSource());
         $statement->execute();
         $this->mySqlClient->closeConnection();
     }

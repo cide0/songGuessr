@@ -30,7 +30,7 @@ body{
 
 #add-song-form{
     position: fixed;
-    top: 20%;
+    top: 17%;
     left: 50%;
     transform: translate(-50%);
     display: flex;

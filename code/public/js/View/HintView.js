@@ -87,12 +87,7 @@ export class HintView extends View{
 
             this.loadedHints++;
             let hintCounter = new Div('hint-counter');
-            hintCounter.remove();
-            let hintHeaderContainer = new Div('hint-header-container');
-            let newHintCounter = this.domParser.createElement('div');
-            newHintCounter.setAttribute('id', 'hint-counter');
-            newHintCounter.innerHTML = this.loadedHints + '|' + this.maxHints;
-            hintHeaderContainer.appendChild(newHintCounter);
+            hintCounter.htmlElement.innerHTML = this.loadedHints + '|' + this.maxHints;
         }, {once: true});
     }
 
