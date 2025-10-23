@@ -94,7 +94,7 @@ class SongModel
 
     private function extractVideoSource(array $data): ?string
     {
-        if(isset($data['video_source'])) {
+        if(isset($data['video_source']) && $data['video_source'] !== '') {
             return $data['video_source'];
         }
 
@@ -103,7 +103,7 @@ class SongModel
 
     private function extractAlbum(array $data): ?string
     {
-        if(isset($data['album'])) {
+        if(isset($data['album']) && $data['album'] !== '') {
             return $data['album'];
         }
 
@@ -112,7 +112,7 @@ class SongModel
 
     private function extractAlbumCoverSource(array $data): ?string
     {
-        if(isset($data['album_cover_source'])) {
+        if(isset($data['album_cover_source']) && $data['album_cover_source'] !== '') {
             return $data['album_cover_source'];
         }
 
@@ -121,7 +121,7 @@ class SongModel
 
     private function extractReleased(array $data): ?int
     {
-        if(isset($data['released'])) {
+        if(isset($data['released']) && $data['released'] !== '') {
             return $data['released'];
         }
 
@@ -157,7 +157,7 @@ class SongModel
 
     private function extractGenre(array $data): ?string
     {
-        if(isset($data['genre'])) {
+        if(isset($data['genre']) && $data['genre'] !== '') {
             return $data['genre'];
         }
 
@@ -166,7 +166,7 @@ class SongModel
 
     private function extractArtistImageSource(array $data): ?string
     {
-        if(isset($data['artist_image_source'])) {
+        if(isset($data['artist_image_source']) && $data['artist_image_source'] !== '') {
             return $data['artist_image_source'];
         }
 
