@@ -24,9 +24,10 @@ export class MusicVideoHint extends Hint{
         });
 
         musicVideoElement.addEventListener('loadedmetadata', () => {
-            let maxStartTime = Math.max(0, musicVideoElement.duration - this.videoPlayDuration);
+            let minStartTime = 10;
+            let maxStartTime = Math.max(minStartTime, musicVideoElement.duration - this.videoPlayDuration);
 
-            musicVideoElement.currentTime = Math.random() * maxStartTime;
+            musicVideoElement.currentTime = minStartTime + Math.random() * (maxStartTime - minStartTime);
             musicVideoElement.play();
 
             setTimeout(() => {
