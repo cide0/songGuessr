@@ -14,6 +14,18 @@ export class ArtistImageHint extends Hint{
         artistImage.setAttribute('id', 'artist-image-hint-image');
         artistImage.setAttribute('src', this.artistImagePath + this.artistImageSource);
 
+        artistImage.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            shrink();
+            document.addEventListener('click', shrink);
+
+            function shrink() {
+                artistImage.classList.toggle('zoom-in');
+                document.removeEventListener('click', shrink);
+            }
+        });
+
         this.htmlElement.appendChild(artistImage);
     }
 }

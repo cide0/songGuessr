@@ -74,6 +74,8 @@ class HintService
             $hintTypeMapModel->removeHintTypeFromMap($hintTypeMapModel->getMusicVideo10SecondsHintType(), $hintTypeMap);
         }
 
+        $hintTypeMapModel->removeEitherVowelOrLetterHint($hintTypeMap);
+
         return $hintTypeMap;
     }
 

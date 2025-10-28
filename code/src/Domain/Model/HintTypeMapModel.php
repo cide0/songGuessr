@@ -10,6 +10,8 @@ class HintTypeMapModel
     private const string ARTIST_IMAGE_HINT_TYPE = 'artistImage';
     private const string GENRE_HINT_TYPE = 'genre';
     private const string MUSIC_VIDEO_10_SECONDS_HINT_TYPE = 'musicVideo10Seconds';
+    private const string REVEAL_VOWELS_HINT_TYPE = 'revealVowels';
+    private const string REVEAL_LETTER_HINT_TYPE = 'revealLetter';
 
     public function __construct(array $data) {
         $this->generate($data);
@@ -55,5 +57,15 @@ class HintTypeMapModel
     public function getMusicVideo10SecondsHintType(): string
     {
         return self::MUSIC_VIDEO_10_SECONDS_HINT_TYPE;
+    }
+
+    public function removeEitherVowelOrLetterHint(array &$hintTypeMap): void
+    {
+        if(count($hintTypeMap) )
+        if (rand(0, 1) === 0) {
+            unset($hintTypeMap[self::REVEAL_LETTER_HINT_TYPE]);
+        } else {
+            unset($hintTypeMap[self::REVEAL_VOWELS_HINT_TYPE]);
+        }
     }
 }

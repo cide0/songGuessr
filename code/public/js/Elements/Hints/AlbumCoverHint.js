@@ -14,6 +14,18 @@ export class AlbumCoverHint extends Hint{
         albumCoverImage.setAttribute('id', 'album-cover-hint-image');
         albumCoverImage.setAttribute('src', this.albumCoverPath + this.albumCoverSource);
 
+        albumCoverImage.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            shrink();
+            document.addEventListener('click', shrink);
+
+            function shrink() {
+                albumCoverImage.classList.toggle('zoom-in');
+                document.removeEventListener('click', shrink);
+            }
+        });
+
         this.htmlElement.appendChild(albumCoverImage);
     }
 }
