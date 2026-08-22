@@ -1,4 +1,4 @@
-![icon](./code/public/assets/icons/favicon.png "Icon") # SongGuessr
+<img src="./code/public/assets/icons/favicon.png" alt="icon" width="200"/> # SongGuessr
 
 SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of hints.
 You can also add the person who chose the song to add another layer of difficulty.
@@ -16,17 +16,17 @@ If you want to play, you have to import the needed song data first. A descriptio
 
 ### Hints
 - There are currently 10 different hint types available:
-    1. **Album cover:** The album cover the song is from is displayed.
-    2. **Album name:** The name of the album the song is from is displayed.
-    3. **Artist image:** An image of the artist is displayed.
-    4. **Artist name:** The name of the artist is displayed.
-    5. **Audio:** The audio of the song can be played as long as preferred.
-    6. **Genre:** The genre of the song is displayed.
-    7. **Music video:** 10 random seconds of the music video of the song are shown.
-    8. **Release year:** The year the song was released is displayed.
-    9. **Reveal letter:** An input field will be displayed that allows you to reveal every occurrence of a single character in the song title. 
-       You can try characters until you choose one that is contained in the song title. Afterward, it will also show you all the characters you tried.
-    10. **Reveal vowels:** All vowels in the song title are revealed.
+  1. **Album cover:** The album cover the song is from is displayed.
+  2. **Album name:** The name of the album the song is from is displayed.
+  3. **Artist image:** An image of the artist is displayed.
+  4. **Artist name:** The name of the artist is displayed.
+  5. **Audio:** The audio of the song can be played as long as preferred.
+  6. **Genre:** The genre of the song is displayed.
+  7. **Music video:** 10 random seconds of the music video of the song are shown.
+  8. **Release year:** The year the song was released is displayed.
+  9. **Reveal letter:** An input field will be displayed that allows you to reveal every occurrence of a single character in the song title. 
+     You can try characters until you choose one that is contained in the song title. Afterward, it will also show you all the characters you tried.
+  10. **Reveal vowels:** All vowels in the song title are revealed.
 
 - There are a few rules regarding how these hint types work that should be kept in mind:
     - There are always 5 hint types available per song.
