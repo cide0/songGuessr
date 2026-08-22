@@ -14,6 +14,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./../../code:/var/www/html
+    env_file:
+      - ../../.env
 
   mysql:
     image: songguessr/mysql:dev
@@ -24,7 +26,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./../../database:/var/lib/mysql:rw
-    environment:
-      - MYSQL_ROOT_PASSWORD=admin
     ports:
       - '3306:3306'
+    env_file:
+      - ../../.env

@@ -7,4 +7,4 @@
 /code/public/assets/video
 /code/public/assets/audio/song_audio
 /code/public/assets/img
-/docker/mysql/backups
+.env

@@ -1,10 +1,14 @@
 # SongGuessr
 
 SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of hints.
+You can also add the person who chose the song to add another layer of difficulty.
+If you want to play yourself, you have to import the needed song data first. A description of how to do this can be found in the next section.
 
-## Documentation
+## Current Features
 
-### Setup
+- There are currently 
+
+## Setup
 
 To set up the project, follow these steps:
 1. Use the make target `install`.
@@ -13,7 +17,7 @@ To set up the project, follow these steps:
 4. The API should now be accessible at `http://localhost:88/`.
 5. To run the game, simply open the `index.html` file in your web browser.
 
-### Database Backups
+## Database Backups
 
 To create a database backup, use the make target `backup`. The backup will be saved as a SQL file in the `docker/mysql/backups/` folder.
 
