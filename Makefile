@@ -34,7 +34,7 @@ install: build-dev create-asset-folders
 
 .PHONY: create-asset-folders
 create-asset-folders:
-	mkdir -p ./code/public/assets/video
+	mkdir -p ./code/public/assets/video/music_videos
 	mkdir -p ./code/public/assets/audio/song_audio
 	mkdir -p ./code/public/assets/img/album_covers
 	mkdir -p ./code/public/assets/img/artist_images
