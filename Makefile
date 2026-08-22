@@ -48,10 +48,10 @@ cleanup:
 backup:
 	docker exec songguessr_mysql /usr/bin/mysqldump -u root --p$(PASSWORD) $(DATABASE) > "./docker/mysql/backups/`date +%Y-%m-%d`.sql"
 
-.PHONY: import-db-backup
+.Phony: import-db-backup
 import-db-backup:
 	docker cp "./docker/mysql/backups/$(FILENAME)" songguessr_mysql:backup.sql && \
-	docker exec songguessr_mysql bash -c "mysql -uroot -p$(PASSWORD) $(DATABASE) < backup.sql"
+	docker exec songguessr_mysql bash -c "mysql -uroot -p$(PASSWORD) -e 'CREATE DATABASE IF NOT EXISTS $(DATABASE);' && mysql -uroot -p$(PASSWORD) $(DATABASE) < backup.sql"
 
 .PHONY: unit-test
 unit-test:
