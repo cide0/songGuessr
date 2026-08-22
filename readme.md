@@ -14,6 +14,7 @@ To set up the project, follow these steps:
 1. Use the make target `install`.
 2. Use the make target `up` to start the backend API.
 3. Decide whether to use the live or test database by changing the `USE_TEST_DB` constant in `Configuration.php` to `false` for live or `true` for test.
+4. If needed, copy `.env.example` to `.env` and adjust values like `MYSQL_ROOT_PASSWORD`, `DB_USERNAME`, `DB_NAME`, and `DB_HOST`.
 4. The API should now be accessible at `http://localhost:88/`.
 5. To run the game, simply open the `index.html` file in your web browser.
 

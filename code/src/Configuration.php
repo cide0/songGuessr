@@ -5,29 +5,36 @@ namespace songguessr;
 class Configuration
 {
     private CONST USE_TEST_DB = false;
-    private CONST HOST = 'mysql';
-    private CONST USERNAME = 'root';
-    private CONST PASSWORD = 'admin';
-    private CONST DATABASE = 'songguessr';
-    private CONST TEST_DATABASE = 'songguessr_testing';
+    private CONST DEFAULT_HOST = 'mysql';
+    private CONST DEFAULT_USERNAME = 'root';
+    private CONST DEFAULT_PASSWORD = 'admin';
+    private CONST DEFAULT_DATABASE = 'songguessr';
+    private CONST DEFAULT_TEST_DATABASE = 'songguessr_testing';
 
     public function getHost(): string
     {
-        return self::HOST;
+        $value = getenv('DB_HOST');
+        return $value !== false && $value !== '' ? $value : self::DEFAULT_HOST;
     }
 
     public function getUsername(): string
     {
-        return self::USERNAME;
+        $value = getenv('DB_USERNAME');
+        return $value !== false && $value !== '' ? $value : self::DEFAULT_USERNAME;
     }
 
     public function getPassword(): string
     {
-        return self::PASSWORD;
+        $value = getenv('MYSQL_ROOT_PASSWORD');
+        return $value !== false && $value !== '' ? $value : self::DEFAULT_PASSWORD;
     }
 
     public function getDatabase(): string
     {
-        return self::USE_TEST_DB ? self::TEST_DATABASE : self::DATABASE;
+        $value = getenv('DB_NAME');
+        if ($value !== false && $value !== '') {
+            return $value;
+        }
+        return self::USE_TEST_DB ? self::DEFAULT_TEST_DATABASE : self::DEFAULT_DATABASE;
     }
 }
