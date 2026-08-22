@@ -29,8 +29,15 @@ down:
 	docker ps
 
 .PHONY: install
-install: build-dev
+install: build-dev create-asset-folders
 	$(CLI) run --rm --no-deps php_cli php -d memory_limit=-1 /usr/local/bin/composer install
+
+.PHONY: create-asset-folders
+create-asset-folders:
+	mkdir -p ./code/public/assets/video
+	mkdir -p ./code/public/assets/audio/song_audio
+	mkdir -p ./code/public/assets/img/album_covers
+	mkdir -p ./code/public/assets/img/artist_images
 
 .PHONY: update
 update:
@@ -48,7 +55,7 @@ cleanup:
 backup:
 	docker exec songguessr_mysql /usr/bin/mysqldump -u root --p$(PASSWORD) $(DATABASE) > "./docker/mysql/backups/`date +%Y-%m-%d`.sql"
 
-.Phony: import-db-backup
+.PHONY: import-db-backup
 import-db-backup:
 	docker cp "./docker/mysql/backups/$(FILENAME)" songguessr_mysql:backup.sql && \
 	docker exec songguessr_mysql bash -c "mysql -uroot -p$(PASSWORD) -e 'CREATE DATABASE IF NOT EXISTS $(DATABASE);' && mysql -uroot -p$(PASSWORD) $(DATABASE) < backup.sql"
