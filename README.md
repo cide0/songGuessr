@@ -8,6 +8,8 @@ You can also add the person's name who chose the song to add another layer of di
 
 If you want to play, you have to import the needed song data first after running the [Setup steps](#setup). A description of how to do this can be found in the [Adding songs section](#adding-songs).
 
+
+
 ## Current Features
 
 ### Base Game Functionality
@@ -23,6 +25,7 @@ If you want to play, you have to import the needed song data first after running
 - The game automatically stores which songs have been guessed already and what song is currently active, so you can re-open the page and continue where you left off.
 - When all songs have been guessed, a message is displayed and the game can be restarted.
 - Animations and sound effects! :relaxed:
+
 
 ### Hints
 
@@ -47,6 +50,7 @@ There are a few rules regarding how these hint types work that should be kept in
   - The audio hint is always available as the 5th and final hint, so you can always listen to the song if you want to.
   - The hints can be revealed in any order.
   - Only hint type **Reveal letter** or **Reveal vowels** can be used to reveal letters in the song title. They will never both be available for the same song.
+
 
 ### Adding Songs
 
@@ -119,6 +123,8 @@ You don't have to fill out all fields for every song, only the ones marked as re
 However, keep in mind that the more data you provide, the more hints/features will be available for that song.
 Congrats, after adding your songs the game can start! :fireworks:
 
+
+
 ## Setup
 
 1. Copy `.env.example` to `.env` and fill in your actual credentials:
@@ -140,6 +146,8 @@ Congrats, after adding your songs the game can start! :fireworks:
 5. Add songs by following the instructions in the [Adding Songs](#adding-songs) section.
 
 6. To run the game, simply open the `code/html/index.html` file in your web browser.
+
+
 
 ## Make Targets
 
