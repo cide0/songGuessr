@@ -1,5 +1,6 @@
-<p align="center"><img src="./code/public/assets/icons/favicon.png" alt="icon" width="100"/></p>
+<p align="center"><img src="./code/public/assets/icons/favicon.png" alt="icon" width="90"/></p>
 <h1 align="center">SongGuessr</h1>
+<p align="center">img src="https://img.shields.io/github/v/tag/cide0/songGuessr?label=latest%20version&style=flat-square"/></p>
 
 SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of hints.
 You can also add the person who chose the song to add another layer of difficulty.
