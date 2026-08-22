@@ -1,34 +1,42 @@
 <p align="center"><img src="./code/public/assets/icons/favicon.png" alt="icon" width="90"/></p>
 <h1 align="center">SongGuessr</h1>
-<p align="center">img src="https://img.shields.io/github/v/tag/cide0/songGuessr?label=latest%20version&style=flat-square"/></p>
+<p align="center"><img src="https://img.shields.io/github/v/tag/cide0/songGuessr?label=latest%20version&style=flat-square"/></p>
 
-SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of hints.
+SongGuessr is a fun web app that challenges you to guess the title of a song based on a variety of hints. 
+
 You can also add the person who chose the song to add another layer of difficulty.
+
 If you want to play, you have to import the needed song data first. A description of how to do this can be found in the [Adding songs section](#adding-songs).
 
 ## Current Features
 
 ### Base Game Functionality
 
-- Press the **Start game** button or the **Restart game** button at any time during a running game to start a new one.
+- Press the **Start game** button or the **Restart game** button at any time during a running game to start a new one. This fully resets the current game state and re-selects the song hints for every song.
 - The songs will be presented one by one in a random order that changes for every game.
-- The song name and the person's name (if set) are censored with an underscore for each character.
-- A hint section is displayed at the bottom of the page for each song, more on how hints work can be found in the [Hints section](#hints).
+- The song name and the player name (if set) are censored with an underscore for each character.
+- A hints section is displayed at the bottom of the page for each song, more on how hints work can be found in the [Hints section](#hints).
+- Press the **Reveal song** button to reveal the current song title if you are stuck.
+- Press the **Reveal player** button (if a player name is set) to reveal the current player name if you are stuck.
+- Press the **Next song** button to load the next song.
+- Click on any image in the hints sections to make it bigger.
+- The game automatically stores which songs have been guessed already and what song is currently active, so you can re-open the page and continue where you left off.
+- When all songs have been guessed, a message is displayed and the game can be restarted.
 - Animations and sound effects! :relaxed:
 
 ### Hints
 - There are currently 10 different hint types available:
-  1. **Album cover:** The album cover the song is from is displayed.
-  2. **Album name:** The name of the album the song is from is displayed.
-  3. **Artist image:** An image of the artist is displayed.
-  4. **Artist name:** The name of the artist is displayed.
-  5. **Audio:** The audio of the song can be played as long as preferred.
-  6. **Genre:** The genre of the song is displayed.
-  7. **Music video:** 10 random seconds of the music video of the song are shown.
-  8. **Release year:** The year the song was released is displayed.
-  9. **Reveal letter:** An input field will be displayed that allows you to reveal every occurrence of a single character in the song title. 
-     You can try characters until you choose one that is contained in the song title. Afterward, it will also show you all the characters you tried.
-  10. **Reveal vowels:** All vowels in the song title are revealed.
+1. **Album cover:** The album cover the song is from is displayed.
+2. **Album name:** The name of the album the song is from is displayed.
+3. **Artist image:** An image of the artist is displayed.
+4. **Artist name:** The name of the artist is displayed.
+5. **Audio:** The audio of the song can be played as long as preferred.
+6. **Genre:** The genre of the song is displayed.
+7. **Music video:** 10 random seconds of the music video of the song are shown.
+8. **Release year:** The year the song was released is displayed.
+9. **Reveal letter:** An input field will be displayed that allows you to reveal every occurrence of a single character in the song title. 
+   You can try characters until you choose one that is contained in the song title. Afterward, it will also show you all the characters you tried.
+10. **Reveal vowels:** All vowels in the song title are revealed.
 
 - There are a few rules regarding how these hint types work that should be kept in mind:
     - There are always 5 hint types available per song.
@@ -36,7 +44,7 @@ If you want to play, you have to import the needed song data first. A descriptio
       This means that every time you restart the game, you will get a different set of hint types for the same song.
       **Important Note:** If needed song data is missing for any hint type, that hint type will not be available for that song and is automatically filtered out. More on that can be found in the [Adding songs section](#adding-songs).
     - The audio hint is always available as the 5th and final hint, so you can always listen to the song if you want to.
-    - The hints can be unveiled in any order.
+    - The hints can be revealed in any order.
     - Only hint type **Reveal letter** or **Reveal vowels** can be used to reveal letters in the song title. They will never both be available for the same song.
 
 ### Adding Songs
