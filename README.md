@@ -145,10 +145,10 @@ Congrats, after adding your songs the game can start! :fireworks:
 
 There are different make targets available to install and run this project:
 - `make list` - List all available make targets.
-- `make build_dev` - Build the Docker images.
+- `make build-dev` - Build the Docker images.
 - `make up` - Start the containers.
 - `make down` - Stop the containers.
-- `make install` - Run `make build_dev`, `make create-asset-folders` and install composer dependencies.
+- `make install` - Run `make build-dev`, `make create-asset-folders` and install composer dependencies.
 - `make create-asset-folders` - Create the necessary asset folders.
 - `make update` - Update composer dependencies.
 - `make composer-dump` - Reload composer autoload files.
