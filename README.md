@@ -135,7 +135,7 @@ Congrats, after adding your songs the game can start! :fireworks:
 
 3. Import the default database structure by running `make import-db-backup FILENAME=default.sql PASSWORD={your_database_root_password} DATABASE={your_database_name}`.
 
-4. The Backend-API should now be accessible at `http://localhost:88/`.
+4. Open the browser and go to [Localhost on port 88](http://localhost:88/) for the backend API.
 
 5. Add songs by following the instructions in the [Adding Songs](#adding-songs) section.
 
@@ -148,10 +148,10 @@ There are different make targets available to install and run this project:
 - `make build-dev` - Build the Docker images.
 - `make up` - Start the containers.
 - `make down` - Stop the containers.
-- `make install` - Run `make build-dev`, `make create-asset-folders` and install composer dependencies.
+- `make install` - Run `make build-dev`, `make create-asset-folders` and install `composer` dependencies.
 - `make create-asset-folders` - Create the necessary asset folders.
-- `make update` - Update composer dependencies.
-- `make composer-dump` - Reload composer autoload files.
+- `make update` - Update `composer` dependencies.
+- `make composer-dump` - Reload `composer` autoload files.
 - `make cleanup` - Cleanup all containers, images and volumes.
 - `make backup PASSWORD={your_database_root_password} DATABASE={your_database_name}` - Create a backup SQL file (in `docker/mysql/backups`) of the specified database.
 - `make import-db-backup FILENAME={filename.sql} PASSWORD={your_database_root_password} DATABASE={your_database_name}` - Import a backup SQL file (contained in `docker/mysql/backups`) into the specified database.
